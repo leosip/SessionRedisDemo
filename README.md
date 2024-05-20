@@ -1,5 +1,5 @@
 # SessionRedisDemo
-An MVC .NET 8 demo application with cache distributed by Redis or memory, according to the desired environment. As a demonstration, Data Protection Keys are stored in Redis or local file (volume).
+An MVC .NET 8 demo application with cache distributed by Redis or memory, according to the desired environment. As demonstration, Data Protection Keys are stored in Redis or local file (volume) on containers setup.
 
 ## Run the application
 
