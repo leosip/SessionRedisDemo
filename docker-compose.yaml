@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web_redis:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DockerRedis
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+  web_memory:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DockerMemory
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    volumes:
+      - dataprotection-keys:/root/.aspnet/DataProtection-Keys
+
+volumes:
+  dataprotection-keys:
