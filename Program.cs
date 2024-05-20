@@ -23,7 +23,7 @@ if (useRedis)
     var redisConnectionString = builder.Configuration.GetConnectionString("RedisConnection");
     if (redisConnectionString == null) 
     {
-        throw new ApplicationException("String de conexão não identificada: Redis");
+        throw new ApplicationException("Redis connection string is missing.");
     }
     var redis = ConnectionMultiplexer.Connect(redisConnectionString);
 
@@ -40,9 +40,12 @@ if (useRedis)
 }
 else 
 {
-    builder.Services.AddDataProtection()
-        .SetApplicationName(appName)
-        .PersistKeysToFileSystem(new DirectoryInfo(@"/root/.aspnet/DataProtection-Keys"));
+    if (builder.Environment.IsEnvironment("DockerMemory")) 
+    {
+        builder.Services.AddDataProtection()
+            .SetApplicationName(appName)
+            .PersistKeysToFileSystem(new DirectoryInfo(@"/root/.aspnet/DataProtection-Keys"));
+    }
 
     builder.Services.AddDistributedMemoryCache();        
 }

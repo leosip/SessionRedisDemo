@@ -15,18 +15,21 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var value = HttpContext.Session.GetString("SessionKeyName");
+        var value = HttpContext.Session.GetString("PrivacyWasAccessed");
         if (string.IsNullOrEmpty(value)) 
         {
-            value = "Index";
+            value = "NO";
         }
-        ViewBag.SessionValue = value;
+        ViewBag.PrivacyWasAccessed = value;
         return View();
     }
 
     public IActionResult Privacy()
     {
-        HttpContext.Session.SetString("SessionKeyName", "PRIVACY");
+        HttpContext.Session.SetString("PrivacyWasAccessed", "YES");
+
+        var value = HttpContext.Session.GetString("PrivacyWasAccessed");
+        ViewBag.PrivacyWasAccessed = value;
         return View();
     }
 
