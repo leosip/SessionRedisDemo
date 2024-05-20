@@ -23,7 +23,7 @@ Endereço:
 
 ---
 
-### Local
+### Local (with memory cache and no data protection file persistent)
 ```
 dotnet run
 ```
